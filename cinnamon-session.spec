@@ -4,7 +4,7 @@
 Summary: Cinnamon session manager
 Name:    cinnamon-session
 Version: 2.4.2
-Release: %mkrel 1
+Release: 1
 URL:     http://cinnamon.linuxmint.com
 
 Source0: cinnamon-session-%{version}.tar.gz
@@ -111,87 +111,4 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/cinnamon-session-properties.svg
 %{_datadir}/glib-2.0/schemas/org.cinnamon.SessionManager.gschema.xml
 
-
-%changelog
-* Thu Nov 27 2014 joequant <joequant> 2.4.2-1.mga5
-+ Revision: 799535
-- upgrade to 2.4.2
-
-* Sun Nov 23 2014 joequant <joequant> 2.4.1-1.mga5
-+ Revision: 798403
-- upgrade to 2.4
-
-* Wed Oct 15 2014 umeabot <umeabot> 2.2.2-5.mga5
-+ Revision: 743354
-- Second Mageia 5 Mass Rebuild
-
-* Tue Sep 16 2014 umeabot <umeabot> 2.2.2-4.mga5
-+ Revision: 678400
-- Mageia 5 Mass Rebuild
-
-* Fri Sep 05 2014 joequant <joequant> 2.2.2-3.mga5
-+ Revision: 672200
-- remove polkit-desktop-policy requires
-
-* Thu Sep 04 2014 joequant <joequant> 2.2.2-2.mga5
-+ Revision: 671943
-- rebuild with new systemd
-
-* Sat Aug 30 2014 joequant <joequant> 2.2.2-1.mga5
-+ Revision: 669423
-- update to 2.2.2
-
-* Thu May 15 2014 joequant <joequant> 2.2.1-1.mga5
-+ Revision: 622874
-- upgrade to 2.2.1
-
-* Sat Apr 19 2014 joequant <joequant> 2.2.0-1.mga5
-+ Revision: 616932
-- upgrade to 2.2
-- upgrade to 2.2
-
-* Sun Mar 30 2014 joequant <joequant> 2.0.6-4.mga5
-+ Revision: 610659
-- upgrade to upower 1.0
-
-  + dams <dams>
-    - rebuild for new upower
-
-* Wed Jan 08 2014 joequant <joequant> 2.0.6-2.mga4
-+ Revision: 565561
-- push to core/release
-
-* Wed Jan 01 2014 joequant <joequant> 2.0.6-1.mga4
-+ Revision: 563808
-- upgrade to 2.0.6
-- upgrade to 2.0.6
-
-* Tue Dec 03 2013 colin <colin> 2.0.1-3.mga4
-+ Revision: 554783
-- Switch to mate-polkit for the fallback session authentication agent.
-
-* Tue Oct 22 2013 umeabot <umeabot> 2.0.1-2.mga4
-+ Revision: 542046
-- Mageia 4 Mass Rebuild
-
-* Mon Oct 14 2013 joequant <joequant> 2.0.1-1.mga4
-+ Revision: 496767
-- upgrade to 2.0.1
-
-* Mon Oct 07 2013 joequant <joequant> 2.0.0-1.mga4
-+ Revision: 492666
-- fix patches
-- update to 2.0.0
-
-* Tue Oct 01 2013 joequant <joequant> 1.9.2-1.mga4
-+ Revision: 490050
-- update to 1.9.2
-
-* Fri Aug 23 2013 joequant <joequant> 1.0.0-0.2.git58710ea.mga4
-+ Revision: 470132
-- fix requires
-
-* Fri Aug 23 2013 joequant <joequant> 1.0.0-0.1.git58710ea.mga4
-+ Revision: 470046
-- imported package cinnamon-session
 
