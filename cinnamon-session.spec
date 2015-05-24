@@ -3,7 +3,7 @@
 
 Summary: Cinnamon session manager
 Name:    cinnamon-session
-Version: 2.4.2
+Version: 2.6.0
 Release: 1
 URL:     http://cinnamon.linuxmint.com
 
@@ -69,19 +69,12 @@ NOCONFIGURE=1 ./autogen.sh
 %build
 %configure2_5x --enable-docbook-docs \
            --docdir=%{_datadir}/doc/%{name} \
-           --enable-systemd
+           --enable-systemd --enable-compile-warnings=no
 
 make %{?_smp_mflags} V=1
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
-
-desktop-file-install                                     \
-  --delete-original                                      \
-  --set-icon=cinnamon-session-properties                 \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications          \
-  $RPM_BUILD_ROOT%{_datadir}/applications/cinnamon-session-properties.desktop
-
 
 %find_lang %{po_package}
 
@@ -102,7 +95,6 @@ fi
 %files -f %{po_package}.lang
 %doc AUTHORS COPYING README
 %doc %{_mandir}/man*/*
-%{_datadir}/applications/cinnamon-session-properties.desktop
 %{_bindir}/*
 %{_libexecdir}/cinnamon-session-check-accelerated
 %{_libexecdir}/cinnamon-session-check-accelerated-helper
