@@ -3,7 +3,7 @@
 
 Summary: Cinnamon session manager
 Name:    cinnamon-session
-Version: 3.2.0
+Version: 4.0.0
 Release: 1
 URL:     http://cinnamon.linuxmint.com
 
@@ -49,11 +49,13 @@ BuildRequires: gnome-common
 BuildRequires: pkgconfig(x11)
 BuildRequires: pkgconfig(xt)
 BuildRequires: pkgconfig(xtst)
+BuildRequires: pkgconfig(xapp)
 BuildRequires: xmlto
 BuildRequires: pkgconfig(upower-glib)
 BuildRequires: pkgconfig(systemd)
 BuildRequires: pkgconfig(polkit-gobject-1)
 BuildRequires: pkgconfig(libcanberra)
+BuildRequires:	meson
 
 # an artificial requires to make sure we get dconf, for now
 Requires: dconf
@@ -64,19 +66,17 @@ the other core components and handles logout and saving the session.
 
 %prep
 %setup -q
-NOCONFIGURE=1 ./autogen.sh
 
 %build
-%configure2_5x --enable-docbook-docs \
-           --docdir=%{_datadir}/doc/%{name} \
-           --enable-systemd --enable-compile-warnings=no
+%meson
+#configure2_5x --enable-docbook-docs \
+#          --docdir=%{_datadir}/doc/%{name} \
+#          --enable-systemd --enable-compile-warnings=no
 
-make %{?_smp_mflags} V=1
+%meson_build
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
-
-%find_lang %{po_package}
+%meson_install
 
 %post
 /usr/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
@@ -92,7 +92,7 @@ fi
 /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 /usr/bin/glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 
-%files -f %{po_package}.lang
+%files
 %doc AUTHORS COPYING README
 %doc %{_mandir}/man*/*
 %{_bindir}/*
