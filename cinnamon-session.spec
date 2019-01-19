@@ -68,7 +68,7 @@ the other core components and handles logout and saving the session.
 %setup -q
 
 %build
-%meson
+%meson -Dwith-gconf=false
 #configure2_5x --enable-docbook-docs \
 #          --docdir=%{_datadir}/doc/%{name} \
 #          --enable-systemd --enable-compile-warnings=no
