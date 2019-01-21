@@ -8,7 +8,6 @@ Release: 1
 URL:     http://cinnamon.linuxmint.com
 
 Source0: cinnamon-session-%{version}.tar.gz
-#SourceGet0: https://github.com/linuxmint/cinnamon-session/archive/%{version}.tar.gz
 
 License: GPLv2+ and LGPLv2+
 Group:   Graphical desktop/Cinnamon
@@ -95,6 +94,7 @@ fi
 %files
 %doc AUTHORS COPYING README
 %doc %{_mandir}/man*/*
+%{_docdir}/cinnamon-session/dbus/cinnamon-session.html
 %{_bindir}/*
 %{_libexecdir}/cinnamon-session-check-accelerated
 %{_libexecdir}/cinnamon-session-check-accelerated-helper
