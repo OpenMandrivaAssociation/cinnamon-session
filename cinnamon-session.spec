@@ -7,7 +7,7 @@ Version: 4.2.1
 Release: 1
 URL:     http://cinnamon.linuxmint.com
 
-Source0: cinnamon-session-%{version}.tar.gz
+Source0: https://github.com/linuxmint/cinnamon-session/archive/%{version}/%{name}-%{version}.tar.gz
 
 License: GPLv2+ and LGPLv2+
 Group:   Graphical desktop/Cinnamon
