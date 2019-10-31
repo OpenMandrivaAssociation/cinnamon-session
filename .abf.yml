@@ -1,4 +1,2 @@
-removed_sources:
-  cinnamon-session-3.2.0.tar.gz: d1ca7ad98bdfb59024fa55ca0f0fe33eaaff5df4
 sources:
-  cinnamon-session-4.0.0.tar.gz: 413e16e545aa5c6e48308531e39456ff6498cc0c
+  cinnamon-session-4.2.1.tar.gz: 0e83f4aaa97c075b26894d1a068dac76abf0053e
