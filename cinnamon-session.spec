@@ -38,6 +38,7 @@ BuildRequires: pkgconfig(xtrans)
 BuildRequires: pkgconfig(gl)
 BuildRequires: pkgconfig(librsvg-2.0)
 BuildRequires: pkgconfig(json-glib-1.0)
+BuildRequires: pkgconfig(gconf-2.0)
 
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
