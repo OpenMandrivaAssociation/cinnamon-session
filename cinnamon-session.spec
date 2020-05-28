@@ -3,7 +3,7 @@
 
 Summary: Cinnamon session manager
 Name:    cinnamon-session
-Version: 4.4.1
+Version: 4.6.1
 Release: 1
 URL:     http://cinnamon.linuxmint.com
 
@@ -30,7 +30,7 @@ BuildRequires: pkgconfig(dbus-glib-1)
 BuildRequires: pkgconfig(gnome-keyring-1)
 BuildRequires: pkgconfig(libnotify) >= 0.7.0
 BuildRequires: pkgconfig(pango)
-BuildRequires: cinnamon-settings-daemon-devel
+BuildRequires: pkgconfig(cinnamon-settings-daemon)
 BuildRequires: desktop-file-utils
 BuildRequires: pkgconfig(xau)
 BuildRequires: pkgconfig(xrandr)
@@ -103,5 +103,3 @@ fi
 %{_datadir}/icons/hicolor/*/apps/cinnamon-session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/cinnamon-session-properties.svg
 %{_datadir}/glib-2.0/schemas/org.cinnamon.SessionManager.gschema.xml
-
-
