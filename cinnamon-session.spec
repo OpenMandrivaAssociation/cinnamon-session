@@ -68,8 +68,13 @@ the other core components and handles logout and saving the session.
 %setup -q
 
 %build
+%ifarch armv7hnl
+export CC=gcc
+export CXX=g++
+%endif
+
 %meson -Dwith-gconf=false
-#configure2_5x --enable-docbook-docs \
+#configure --enable-docbook-docs \
 #          --docdir=%{_datadir}/doc/%{name} \
 #          --enable-systemd --enable-compile-warnings=no
 
