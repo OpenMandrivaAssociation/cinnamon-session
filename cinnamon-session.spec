@@ -3,7 +3,7 @@
 
 Summary: Cinnamon session manager
 Name:    cinnamon-session
-Version: 4.6.2
+Version: 4.8.0
 Release: 1
 URL:     http://cinnamon.linuxmint.com
 
@@ -74,9 +74,6 @@ export CXX=g++
 %endif
 
 %meson -Dwith-gconf=false
-#configure --enable-docbook-docs \
-#          --docdir=%{_datadir}/doc/%{name} \
-#          --enable-systemd --enable-compile-warnings=no
 
 %meson_build
 
