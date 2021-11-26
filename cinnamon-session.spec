@@ -3,7 +3,7 @@
 
 Summary: Cinnamon session manager
 Name:    cinnamon-session
-Version: 5.0.1
+Version: 5.2.0
 Release: 1
 URL:     http://cinnamon.linuxmint.com
 
