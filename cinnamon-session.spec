@@ -97,7 +97,6 @@ fi
 %files
 %doc AUTHORS COPYING README
 %doc %{_mandir}/man*/*
-%{_docdir}/cinnamon-session/dbus/cinnamon-session.html
 %{_bindir}/*
 %{_libexecdir}/cinnamon-session-check-accelerated
 %{_libexecdir}/cinnamon-session-check-accelerated-helper
