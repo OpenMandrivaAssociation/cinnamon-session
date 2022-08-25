@@ -73,7 +73,7 @@ export CC=gcc
 export CXX=g++
 %endif
 
-%meson -Dwith-gconf=false
+%meson
 
 %meson_build
 
