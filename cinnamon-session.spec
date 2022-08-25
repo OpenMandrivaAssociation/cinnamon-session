@@ -3,7 +3,7 @@
 
 Summary: Cinnamon session manager
 Name:    cinnamon-session
-Version: 5.2.0
+Version: 5.4.0
 Release: 1
 URL:     http://cinnamon.linuxmint.com
 
@@ -23,7 +23,7 @@ Requires: dbus-x11
 
 # we need an authentication agent in the fallback session
 Requires: polkit-gnome
-
+Requires: dconf
 BuildRequires: pkgconfig(gtk+-3.0) >= 2.99.0
 BuildRequires: pkgconfig(dbus-1)
 BuildRequires: pkgconfig(dbus-glib-1)
@@ -73,7 +73,7 @@ export CC=gcc
 export CXX=g++
 %endif
 
-%meson -Dwith-gconf=false
+%meson
 
 %meson_build
 
@@ -97,7 +97,6 @@ fi
 %files
 %doc AUTHORS COPYING README
 %doc %{_mandir}/man*/*
-%{_docdir}/cinnamon-session/dbus/cinnamon-session.html
 %{_bindir}/*
 %{_libexecdir}/cinnamon-session-check-accelerated
 %{_libexecdir}/cinnamon-session-check-accelerated-helper
