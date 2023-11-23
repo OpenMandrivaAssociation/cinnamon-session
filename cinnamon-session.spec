@@ -8,7 +8,6 @@ Release: 1
 URL:     http://cinnamon.linuxmint.com
 
 Source0: https://github.com/linuxmint/cinnamon-session/archive/%{version}/%{name}-%{version}.tar.gz
-Patch0:  158.patch
 
 License: GPLv2+ and LGPLv2+
 Group:   Graphical desktop/Cinnamon
