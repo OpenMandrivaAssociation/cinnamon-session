@@ -1,0 +1,31 @@
+From 91740adbf2d738ff096e5f82d7e59a22efea97e4 Mon Sep 17 00:00:00 2001
+From: Leigh Scott <leigh123linux@gmail.com>
+Date: Wed, 22 Nov 2023 11:27:07 +0000
+Subject: [PATCH] autostart-app: don't try to add child watch to dbus activated
+  services
+
+---
+ cinnamon-session/csm-autostart-app.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/cinnamon-session/csm-autostart-app.c b/cinnamon-session/csm-autostart-app.c
+index 3dd764d..0b08f05 100644
+--- a/cinnamon-session/csm-autostart-app.c
++++ b/cinnamon-session/csm-autostart-app.c
+@@ -1056,10 +1056,12 @@ autostart_app_start_spawn (CsmAutostartApp *app,
+         g_signal_handler_disconnect (ctx, handler);
+ 
+         if (success) {
+-                g_debug ("CsmAutostartApp: started pid:%d", app->priv->pid);
+-                app->priv->child_watch_id = g_child_watch_add (app->priv->pid,
+-                                                               (GChildWatchFunc)app_exited,
+-                                                               app);
++                if (app->priv->pid > 0) {
++                        g_debug ("CsmAutostartApp: started pid:%d", app->priv->pid);
++                        app->priv->child_watch_id = g_child_watch_add (app->priv->pid,
++                                                                       (GChildWatchFunc)app_exited,
++                                                                       app);
++                }
+         } else {
+                 g_set_error (error,
+                              CSM_APP_ERROR,
