@@ -3,11 +3,12 @@
 
 Summary: Cinnamon session manager
 Name:    cinnamon-session
-Version: 5.8.1
+Version: 6.0.0
 Release: 1
 URL:     http://cinnamon.linuxmint.com
 
 Source0: https://github.com/linuxmint/cinnamon-session/archive/%{version}/%{name}-%{version}.tar.gz
+Patch0:  158.patch
 
 License: GPLv2+ and LGPLv2+
 Group:   Graphical desktop/Cinnamon
@@ -30,11 +31,13 @@ BuildRequires: pkgconfig(dbus-glib-1)
 BuildRequires: pkgconfig(gnome-keyring-1)
 BuildRequires: pkgconfig(libnotify) >= 0.7.0
 BuildRequires: pkgconfig(pango)
-BuildRequires: pkgconfig(cinnamon-settings-daemon)
+BuildRequires: pkgconfig(cinnamon-desktop) >= 6.0.0
+BuildRequires: pkgconfig(cinnamon-settings-daemon) >= 6.0.0
 BuildRequires: desktop-file-utils
 BuildRequires: pkgconfig(xau)
 BuildRequires: pkgconfig(xrandr)
 BuildRequires: pkgconfig(xtrans)
+BuildRequires: pkgconfig(xcomposite)
 BuildRequires: pkgconfig(gl)
 BuildRequires: pkgconfig(librsvg-2.0)
 BuildRequires: pkgconfig(json-glib-1.0)
@@ -55,7 +58,11 @@ BuildRequires: pkgconfig(upower-glib)
 BuildRequires: pkgconfig(systemd)
 BuildRequires: pkgconfig(polkit-gobject-1)
 BuildRequires: pkgconfig(libcanberra)
-BuildRequires:	meson
+BuildRequires: pkgconfig(sm)            
+BuildRequires: pkgconfig(ice)            
+BuildRequires: pkgconfig(x11)            
+BuildRequires: pkgconfig(xext)
+BuildRequires: meson
 
 # an artificial requires to make sure we get dconf, for now
 Requires: dconf
@@ -65,14 +72,9 @@ Cinnamon-session manages a Cinnamon desktop or GDM login session. It starts up
 the other core components and handles logout and saving the session.
 
 %prep
-%setup -q
+%autosetup p1
 
 %build
-%ifarch armv7hnl
-export CC=gcc
-export CXX=g++
-%endif
-
 %meson
 
 %meson_build
