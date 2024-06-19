@@ -1,0 +1,118 @@
+From a03561febeb48d7c3e416a3fe1f1b542235b0a95 Mon Sep 17 00:00:00 2001
+From: Leigh Scott <leigh123linux@gmail.com>
+Date: Thu, 13 Jun 2024 08:09:29 +0100
+Subject: [PATCH 1/2] Revert "csm-manager.c: Unset WAYLAND_DISPLAY during
+ shutdown in a wayland"
+
+This reverts commit 128fe7f4be184942b16be2f1dae4cc2dee3f20fc.
+---
+ cinnamon-session/csm-manager.c | 30 ------------------------------
+ 1 file changed, 30 deletions(-)
+
+diff --git a/cinnamon-session/csm-manager.c b/cinnamon-session/csm-manager.c
+index 7305baf..655604c 100644
+--- a/cinnamon-session/csm-manager.c
++++ b/cinnamon-session/csm-manager.c
+@@ -951,36 +951,6 @@ maybe_restart_user_bus (CsmManager *manager)
+         if (manager->priv->dbus_disconnected)
+                 return;
+ 
+-        if (g_strcmp0 (g_getenv ("XDG_SESSION_TYPE"), "wayland") == 0) {
+-            g_debug ("CsmManager: Unsetting environment GNOME_SETUP_DISPLAY WAYLAND_DISPLAY DISPLAY XAUTHORITY");
+-
+-            GVariantBuilder builder;
+-            g_variant_builder_init (&builder, G_VARIANT_TYPE ("as"));
+-            g_variant_builder_add (&builder, "s", "GNOME_SETUP_DISPLAY");
+-            g_variant_builder_add (&builder, "s", "WAYLAND_DISPLAY");
+-            g_variant_builder_add (&builder, "s", "DISPLAY");
+-            g_variant_builder_add (&builder, "s", "XAUTHORITY");
+-
+-            reply = g_dbus_connection_call_sync (manager->priv->connection,
+-                                                 "org.freedesktop.systemd1",
+-                                                 "/org/freedesktop/systemd1",
+-                                                 "org.freedesktop.systemd1.Manager",
+-                                                 "UnsetEnvironment",
+-                                                 g_variant_new ("(@as)",
+-                                                                g_variant_builder_end (&builder)),
+-                                                 NULL,
+-                                                 G_DBUS_CALL_FLAGS_NONE,
+-                                                 -1, NULL, &error);
+-
+-            if (error != NULL) {
+-                    g_debug ("CsmManager: unsetting environment failed: %s", error->message);
+-                    g_clear_error (&error);
+-            }
+-            else {
+-                g_variant_unref (reply);
+-            }
+-        }
+-
+         system = csm_get_system ();
+ 
+         if (!csm_system_is_last_session_for_user (system))
+
+From 167f85522d29277dfccdd3f55843d0bafdb14508 Mon Sep 17 00:00:00 2001
+From: Leigh Scott <leigh123linux@gmail.com>
+Date: Thu, 13 Jun 2024 08:10:05 +0100
+Subject: [PATCH 2/2] Revert "csm-manager.c: Stop the user dbus-daemon at the
+ end of the session."
+
+This reverts commit 9961f98e63e7bb0b6d595a8064d50171f7e20695.
+---
+ cinnamon-session/csm-manager.c | 36 ----------------------------------
+ 1 file changed, 36 deletions(-)
+
+diff --git a/cinnamon-session/csm-manager.c b/cinnamon-session/csm-manager.c
+index 655604c..2959ffd 100644
+--- a/cinnamon-session/csm-manager.c
++++ b/cinnamon-session/csm-manager.c
+@@ -941,41 +941,6 @@ _client_stop (const char *id,
+         return FALSE;
+ }
+ 
+-static void
+-maybe_restart_user_bus (CsmManager *manager)
+-{
+-        CsmSystem *system;
+-        g_autoptr(GVariant) reply = NULL;
+-        g_autoptr(GError) error = NULL;
+-
+-        if (manager->priv->dbus_disconnected)
+-                return;
+-
+-        system = csm_get_system ();
+-
+-        if (!csm_system_is_last_session_for_user (system))
+-                return;
+-
+-        g_debug ("CsmManager: reloading user bus");
+-
+-        reply = g_dbus_connection_call_sync (manager->priv->connection,
+-                                             "org.freedesktop.systemd1",
+-                                             "/org/freedesktop/systemd1",
+-                                             "org.freedesktop.systemd1.Manager",
+-                                             "StopUnit",
+-                                             g_variant_new ("(ss)", "dbus.service", "fail"),
+-                                             NULL,
+-                                             G_DBUS_CALL_FLAGS_NONE,
+-                                             -1,
+-                                             NULL,
+-                                             &error);
+-
+-        if (error != NULL) {
+-                g_debug ("CsmManager: reloading user bus failed: %s", error->message);
+-                g_clear_error (&error);
+-        }
+-}
+-
+ static void
+ do_phase_exit (CsmManager *manager)
+ {
+@@ -984,7 +949,6 @@ do_phase_exit (CsmManager *manager)
+                                    (CsmStoreFunc)_client_stop,
+                                    NULL);
+         }
+-        maybe_restart_user_bus (manager);
+         end_phase (manager);
+ }
+ 
