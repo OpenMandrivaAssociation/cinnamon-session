@@ -3,12 +3,12 @@
 
 Summary: Cinnamon session manager
 Name:    cinnamon-session
-Version: 6.0.4
+Version: 6.2.0
 Release: 1
 URL:     http://cinnamon.linuxmint.com
 
 Source0: https://github.com/linuxmint/cinnamon-session/archive/%{version}/%{name}-%{version}.tar.gz
-
+Patch0:  https://patch-diff.githubusercontent.com/raw/linuxmint/cinnamon-session/pull/172.patch
 License: GPLv2+ and LGPLv2+
 Group:   Graphical desktop/Cinnamon
 
@@ -21,8 +21,6 @@ Requires: gsettings-desktop-schemas >= 0.1.7
 # pull in dbus-x11, see bug 209924
 Requires: dbus-x11
 
-# we need an authentication agent in the fallback session
-Requires: polkit-gnome
 Requires: dconf
 BuildRequires: pkgconfig(gtk+-3.0) >= 2.99.0
 BuildRequires: pkgconfig(dbus-1)
