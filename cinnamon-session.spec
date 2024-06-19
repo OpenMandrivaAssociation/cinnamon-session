@@ -101,6 +101,7 @@ fi
 %{_bindir}/*
 %{_libexecdir}/cinnamon-session-check-accelerated
 %{_libexecdir}/cinnamon-session-check-accelerated-helper
+%{_libexecdir}/cinnamon-session-binary
 %{_datadir}/cinnamon-session/
 %{_datadir}/icons/hicolor/*/apps/cinnamon-session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/cinnamon-session-properties.svg
