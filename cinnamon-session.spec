@@ -3,12 +3,10 @@
 
 Summary: Cinnamon session manager
 Name:    cinnamon-session
-Version: 6.2.1
+Version: 6.4.0
 Release: 1
 URL:     https://cinnamon.linuxmint.com
-
 Source0: https://github.com/linuxmint/cinnamon-session/archive/%{version}/%{name}-%{version}.tar.gz
-#Patch0:  https://patch-diff.githubusercontent.com/raw/linuxmint/cinnamon-session/pull/172.patch
 License: GPLv2+ and LGPLv2+
 Group:   Graphical desktop/Cinnamon
 
