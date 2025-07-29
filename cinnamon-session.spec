@@ -4,7 +4,7 @@
 Summary: Cinnamon session manager
 Name:    cinnamon-session
 Version: 6.4.0
-Release: 1
+Release: 2
 URL:     https://cinnamon.linuxmint.com
 Source0: https://github.com/linuxmint/cinnamon-session/archive/%{version}/%{name}-%{version}.tar.gz
 License: GPLv2+ and LGPLv2+
@@ -21,7 +21,11 @@ Requires: dbus-x11
 # we need an authentication agent in the fallback session
 Requires: polkit-gnome
 
+Requires: cinnamon-translations >= 3.6.0
+# an artificial requires to make sure we get dconf, for now
 Requires: dconf
+
+BuildRequires: mold
 BuildRequires: pkgconfig(gtk+-3.0) >= 2.99.0
 BuildRequires: pkgconfig(dbus-1)
 BuildRequires: pkgconfig(dbus-glib-1)
@@ -61,9 +65,6 @@ BuildRequires: pkgconfig(x11)
 BuildRequires: pkgconfig(xext)
 BuildRequires: meson
 
-# an artificial requires to make sure we get dconf, for now
-Requires: dconf
-
 %description
 Cinnamon-session manages a Cinnamon desktop or GDM login session. It starts up
 the other core components and handles logout and saving the session.
@@ -72,6 +73,9 @@ the other core components and handles logout and saving the session.
 %autosetup p1
 
 %build
+%global optflags %{optflags} -fuse-ld=mold
+export CC=gcc
+export CXX=g++
 %meson
 
 %meson_build
