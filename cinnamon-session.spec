@@ -3,7 +3,7 @@
 
 Summary: Cinnamon session manager
 Name:    cinnamon-session
-Version: 6.4.2
+Version: 6.6.1
 Release: 1
 URL:     https://cinnamon.linuxmint.com
 Source0: https://github.com/linuxmint/cinnamon-session/archive/%{version}/%{name}-%{version}.tar.gz
@@ -25,6 +25,8 @@ Requires: cinnamon-translations >= 3.6.0
 # an artificial requires to make sure we get dconf, for now
 Requires: dconf
 
+BuildSystem:   meson
+
 BuildRequires: mold
 BuildRequires: pkgconfig(gtk+-3.0) >= 2.99.0
 BuildRequires: pkgconfig(dbus-1)
@@ -33,7 +35,7 @@ BuildRequires: pkgconfig(gnome-keyring-1)
 BuildRequires: pkgconfig(libnotify) >= 0.7.0
 BuildRequires: pkgconfig(pango)
 BuildRequires: pkgconfig(cinnamon-desktop) >= 6.0.0
-BuildRequires: pkgconfig(cinnamon-settings-daemon) >= 6.0.0
+# BuildRequires: pkgconfig(cinnamon-settings-daemon) >= 6.0.0
 BuildRequires: desktop-file-utils
 BuildRequires: pkgconfig(xau)
 BuildRequires: pkgconfig(xrandr)
@@ -63,25 +65,17 @@ BuildRequires: pkgconfig(sm)
 BuildRequires: pkgconfig(ice)            
 BuildRequires: pkgconfig(x11)            
 BuildRequires: pkgconfig(xext)
-BuildRequires: meson
 
 %description
 Cinnamon-session manages a Cinnamon desktop or GDM login session. It starts up
 the other core components and handles logout and saving the session.
 
-%prep
-%autosetup p1
 
-%build
+%conf -p
 %global optflags %{optflags} -fuse-ld=mold
 export CC=gcc
 export CXX=g++
-%meson
 
-%meson_build
-
-%install
-%meson_install
 
 %post
 /usr/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
