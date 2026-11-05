@@ -2,9 +2,9 @@
 
 Summary: Cinnamon session manager
 Name:    cinnamon-session
-Version: 6.6.4
-Release: 2
-URL:     https://cinnamon.linuxmint.com
+Version: 6.8.0
+Release: 1
+URL:     https://github.com/linuxmint/cinnamon-session/
 Source0: https://github.com/linuxmint/cinnamon-session/archive/%{version}/%{name}-%{version}.tar.gz
 License: GPLv2+ and LGPLv2+
 Group:   Graphical desktop/Cinnamon
@@ -70,7 +70,7 @@ BuildRequires: python
 BuildRequires: xmlto
 #BuildRequires: pkgconfig(upower-glib)
 BuildRequires: pkgconfig(systemd)
-BuildRequires: lib64systemd-devel
+BuildRequires: pkgconfig(libsystemd)
 #BuildRequires: pkgconfig(polkit-gobject-1)
 BuildRequires: meson
 
@@ -106,6 +106,8 @@ fi
 %doc AUTHORS COPYING README
 %doc %{_mandir}/man*/*
 %{_bindir}/*
+/usr/lib/systemd/user/app-cinnamon-.scope.d/app-override.scope.conf
+/usr/lib/systemd/user/dbus.service.d/dbus-override.service.conf
 %{_libexecdir}/cinnamon-session-check-accelerated
 %{_libexecdir}/cinnamon-session-check-accelerated-helper
 %{_libexecdir}/cinnamon-session-binary
